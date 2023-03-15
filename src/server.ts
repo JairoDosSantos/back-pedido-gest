@@ -1,13 +1,9 @@
-import express, { Request, Response } from 'express';
-
-
+import express from 'express';
+import { orderStateRoutes } from './routes/ordersStates.routes';
 const app = express();
 
-app.get("/", (request: Request, response: Response) => {
 
-    return response.
-        status(200).
-        json({ message: "Olá mundo!" })
-});
+app.use(express.json())
+app.use(orderStateRoutes)
 
 app.listen("3333", () => console.log("running..."))
