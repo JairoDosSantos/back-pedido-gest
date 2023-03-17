@@ -2,7 +2,6 @@ import express from 'express';
 import { orderStateRoutes } from './routes/ordersStates.routes';
 const app = express();
 
-
 app.use(express.json())
 app.use(orderStateRoutes)
 
