@@ -1,29 +1,22 @@
 import { Router } from 'express';
-import { v4 as uuidV4 } from 'uuid';
+
+import { orderStateController } from '../modules/orders/useCases/createOrderState';
+import { listOrderStateController } from '../modules/orders/useCases/listOrderState';
+
+
 const orderStateRoutes = Router();
 
-interface IOrderType {
-    id?: string;
-    state: string
-}
 
-let orderStates: IOrderType[] = []
+orderStateRoutes.post("/", (request, response) => {
 
-orderStateRoutes.post("/orderState", (request, response) => {
 
-    const { state } = request.body
-
-    orderStates.push({
-        id: uuidV4(),
-        state
-    })
-
-    return response.status(201).send()
+    return orderStateController.handle(request, response)
 })
 
-orderStateRoutes.get("/orderState", (request, response) => {
+orderStateRoutes.get("/", (request, response) => {
 
-    response.status(200).json(orderStates)
+    return listOrderStateController.handle(request, response)
+
 })
 
 
