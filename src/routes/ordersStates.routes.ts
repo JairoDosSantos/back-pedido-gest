@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { v4 as uuidV4 } from 'uuid';
+import { OrderStateRepository } from '../repositories/orderStateRepositories';
 const orderStateRoutes = Router();
 
 interface IOrderType {
@@ -8,15 +8,12 @@ interface IOrderType {
 }
 
 let orderStates: IOrderType[] = []
-
+const orderStateRepository = new OrderStateRepository()
 orderStateRoutes.post("/orderState", (request, response) => {
 
     const { state } = request.body
 
-    orderStates.push({
-        id: uuidV4(),
-        state
-    })
+    orderStateRepository.create({ state })
 
     return response.status(201).send()
 })

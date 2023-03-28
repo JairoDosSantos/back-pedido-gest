@@ -20,7 +20,6 @@ class OrderStateRepository {
 
         this.ordersStates.push(orderState);
 
-
     }
 
 }
