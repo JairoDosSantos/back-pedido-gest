@@ -1,6 +1,5 @@
 import { v4 as uuidV4 } from 'uuid';
 
-
 class OrderState {
 
     id?: string;
@@ -11,9 +10,7 @@ class OrderState {
         if (!this.id) {
 
             this.id = uuidV4();
-
         }
-
     }
 }
 

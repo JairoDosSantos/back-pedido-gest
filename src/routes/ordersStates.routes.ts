@@ -1,28 +1,18 @@
 import { Router } from 'express';
-import { OrderStateRepository } from '../repositories/orderStateRepositories';
+
+import { orderStateController } from '../modules/orders/useCases/createOrderState';
+import { listOrderStateController } from '../modules/orders/useCases/listOrderState';
+
+
 const orderStateRoutes = Router();
 
-interface IOrderType {
-    id?: string;
-    state: string
-}
-
-let orderStates: IOrderType[] = []
-const orderStateRepository = new OrderStateRepository()
-orderStateRoutes.post("/orderState", (request, response) => {
-
-    const { state } = request.body
-
-    orderStateRepository.create({ state })
-
-    return response.status(201).send()
+orderStateRoutes.post("/", (request, response) => {
+    return orderStateController.handle(request, response)
 })
 
-orderStateRoutes.get("/orderState", (request, response) => {
-
-    response.status(200).json(orderStates)
+orderStateRoutes.get("/", (request, response) => {
+    return listOrderStateController.handle(request, response)
 })
-
 
 export { orderStateRoutes };
 
